@@ -1,7 +1,7 @@
 {
   "name": "athash",
   "version": "0.0.0",
-  "description": "",
+  "description": "Social text parser",
   "main": "lib/athash.js",
   "dependencies": {},
   "devDependencies": {
