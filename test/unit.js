@@ -5,7 +5,7 @@ var Parser = require('../dist/parser');
 
 describe('AtHash', function() {
 
-  it('should return instance of parser', function () {
+  it('Should return instance of parser', function () {
     expect(AtHash()).to.be.an.instanceof(Parser);
   });
 
