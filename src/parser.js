@@ -1,12 +1,12 @@
 export default class Parser {
 
   constructor(text = null) {
-    this.setText(text);
+    this.text(text);
   }
 
   // Set text to parse
-  setText(text) {
-    this.text = text;
+  text(text) {
+    this._text = text;
 
     // Chainable
     return this;
@@ -14,6 +14,6 @@ export default class Parser {
 
   // Parse text
   parse() {
-    return this.text;
+    return this._text;
   }
 }
