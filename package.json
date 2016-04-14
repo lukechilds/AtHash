@@ -2,19 +2,20 @@
   "name": "athash",
   "version": "0.0.0",
   "description": "Social text parser",
-  "main": "lib/athash.js",
+  "main": "dist/athash.js",
   "dependencies": {},
   "devDependencies": {
     "babel-cli": "^6.7.5",
     "babel-plugin-add-module-exports": "^0.1.2",
-    "babel-preset-es2015": "^6.6.0"
+    "babel-preset-es2015": "^6.6.0",
+    "chai": "^3.5.0",
+    "mocha": "^2.4.5"
   },
   "scripts": {
     "build": "babel -d dist src",
     "prepublish": "npm run build",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha test"
   },
-  "main": "dist/athash.js",
   "babel": {
     "presets": [
       "es2015"
