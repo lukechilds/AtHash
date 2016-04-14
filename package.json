@@ -11,8 +11,10 @@
   },
   "scripts": {
     "build": "babel -d dist src",
+    "prepublish": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "main": "dist/athash.js",
   "babel": {
     "presets": [
       "es2015"
