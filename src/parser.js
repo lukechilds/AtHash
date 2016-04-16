@@ -1,3 +1,5 @@
+import defaultFilters from './filters';
+
 export default class Parser {
 
   constructor(text = null) {
