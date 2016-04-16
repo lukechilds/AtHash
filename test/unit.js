@@ -2,6 +2,7 @@ var expect = require('chai').expect;
 
 var AtHash = require('../dist/athash');
 var Parser = require('../dist/parser');
+var twitterFilter = require('../dist/filters/twitter');
 
 var text = "#test #text with #hashtags, @multiple @mentions and a http://url.com";
 
@@ -42,6 +43,33 @@ describe('AtHash', function() {
 
     it('Throw error if trying to use nonexistent filter', function () {
       expect(function() { AtHash().get('nonexistentfilter') }).to.throw(Error);
+    });
+
+  });
+
+  describe('.addFilter()', function() {
+
+    it('Add default filters', function () {
+      var atHash = AtHash();
+      expect(atHash.filters.hashtags.filter).to.be.undefined;
+      atHash.addFilter('twitter');
+      expect(atHash.filters.hashtags.filter).to.equal(twitterFilter.hashtags.filter);
+    });
+
+    it('Add custom filters', function () {
+      var atHash = AtHash();
+      var customFilter = { hashtags: { filter: tag => tag } };
+      expect(atHash.filters.hashtags.filter).to.be.undefined;
+      atHash.addFilter(customFilter);
+      expect(atHash.filters.hashtags.filter).to.equal(customFilter.hashtags.filter);
+    });
+
+    it('Throw error if filter is invalid', function () {
+      expect(function() { AtHash().addFilter('nonexistentfilter') }).to.throw(Error);
+    });
+
+    it('Should be chainable', function () {
+      expect(AtHash().addFilter({})).to.be.an.instanceof(Parser);
     });
 
   });
