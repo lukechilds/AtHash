@@ -19,7 +19,11 @@ export default class Parser {
 
   // Get items from text
   get(item) {
-    return this._text.match(this.filters[item].regex);
+
+    // Make sure we have a string
+    const text = typeof this._text === 'string' ? this._text : '';
+
+    return text.match(this.filters[item].regex);
   }
 
   // Parse text
