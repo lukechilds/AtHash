@@ -18,13 +18,13 @@ export default class Parser {
   }
 
   // Get items from text
-  get(item) {
+  get(filter) {
 
     // Make sure we have a string
     const text = typeof this._text === 'string' ? this._text : '';
 
     // Return matches or empty array
-    return text.match(this.filters[item].regex) || [];
+    return text.match(this.filters[filter].regex) || [];
   }
 
   // Parse text
