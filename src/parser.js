@@ -34,6 +34,29 @@ export default class Parser {
     return text.match(this.filters[filterKey].regex) || [];
   }
 
+  // Add filter
+  addFilter(filter) {
+
+    // Check if it's a default filter key
+    const newFilters = defaultFilters[filter] || filter;
+
+    // Check we have a valid object
+    if(typeof newFilters !== 'object') {
+      throw new Error(`Invalid filter`);
+    }
+
+    // Merge in new filters
+    Object.keys(newFilters).forEach(filterType => {
+      Object.keys(newFilters[filterType]).forEach(filterTypeKey => {
+        const newVal = newFilters[filterType][filterTypeKey];
+        this.filters[filterType][filterTypeKey] = newVal;
+      });
+    });
+
+    // Chainable
+    return this;
+  }
+
   // Parse text
   parse() {
     return this._text;
