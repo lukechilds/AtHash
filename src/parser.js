@@ -17,6 +17,11 @@ export default class Parser {
     return this;
   }
 
+  // Get items from text
+  get(item) {
+    return this._text.match(this.filters[item].regex);
+  }
+
   // Parse text
   parse() {
     return this._text;
