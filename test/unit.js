@@ -40,6 +40,10 @@ describe('AtHash', function() {
       expect(AtHash(text).get('hashtags')).to.deep.equal(['#test', '#text', '#hashtags']);
     });
 
+    it('Throw error if trying to use nonexistent filter', function () {
+      expect(function() { AtHash().get('nonexistentfilter') }).to.throw(Error);
+    });
+
   });
 
   describe('.parse()', function() {
