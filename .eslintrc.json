@@ -160,7 +160,7 @@
         "prefer-rest-params": "error",
         "prefer-spread": "error",
         "prefer-template": "error",
-        "quote-props": "error",
+        "quote-props": "off",
         "radix": "error",
         "require-jsdoc": "off",
         "require-yield": "error",
