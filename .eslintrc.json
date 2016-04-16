@@ -45,7 +45,10 @@
         "init-declarations": "error",
         "jsx-quotes": "error",
         "key-spacing": "error",
-        "keyword-spacing": "error",
+        "keyword-spacing": [
+            "error",
+            { "overrides": { "if": { "after": false } } }
+        ],
         "linebreak-style": [
             "error",
             "unix"
@@ -155,7 +158,7 @@
         "operator-linebreak": "error",
         "padded-blocks": "off",
         "prefer-arrow-callback": "error",
-        "prefer-const": "error",
+        "prefer-const": "warn",
         "prefer-reflect": "error",
         "prefer-rest-params": "error",
         "prefer-spread": "error",
