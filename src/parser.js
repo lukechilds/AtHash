@@ -23,7 +23,8 @@ export default class Parser {
     // Make sure we have a string
     const text = typeof this._text === 'string' ? this._text : '';
 
-    return text.match(this.filters[item].regex);
+    // Return matches or empty array
+    return text.match(this.filters[item].regex) || [];
   }
 
   // Parse text
