@@ -155,7 +155,10 @@
         "no-with": "error",
         "object-curly-spacing": "error",
         "object-shorthand": "error",
-        "one-var": "error",
+        "one-var": [
+          "error",
+          "never"
+        ],
         "one-var-declaration-per-line": "error",
         "operator-assignment": "error",
         "operator-linebreak": "error",
