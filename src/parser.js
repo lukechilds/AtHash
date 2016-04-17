@@ -58,7 +58,13 @@ export default class Parser {
   }
 
   // Parse text
-  parse() {
+  parse(filter = null) {
+
+    // If filter is passed add it
+    if(filter) {
+      this.addFilter(filter);
+    }
+
     return this._text;
   }
 }
