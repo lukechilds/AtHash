@@ -35,10 +35,10 @@ export default class Parser {
   }
 
   // Add filter
-  addFilter(filter) {
+  addFilter(filters) {
 
     // Check if it's a default filter key
-    const newFilters = defaultFilters[filter] || filter;
+    const newFilters = defaultFilters[filters] || filters;
 
     // Check we have a valid object
     if(typeof newFilters !== 'object') {
@@ -58,11 +58,11 @@ export default class Parser {
   }
 
   // Parse text
-  parse(filter = null) {
+  parse(filters = null) {
 
     // If filter is passed add it
-    if(filter) {
-      this.addFilter(filter);
+    if(filters) {
+      this.addFilter(filters);
     }
 
     return this._text;
