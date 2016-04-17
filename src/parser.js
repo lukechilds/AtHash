@@ -20,18 +20,18 @@ export default class Parser {
   }
 
   // Get items from text
-  get(filterKey) {
+  get(filterType) {
 
     // Make sure we have a string
     const text = typeof this._text === 'string' ? this._text : '';
 
     // Make sure filter exists
-    if(!this.filters[filterKey]) {
-      throw new Error(`Filter "${filterKey}" doesn't exist`);
+    if(!this.filters[filterType]) {
+      throw new Error(`Filter "${filterType}" doesn't exist`);
     }
 
     // Return matches or empty array
-    return text.match(this.filters[filterKey].regex) || [];
+    return text.match(this.filters[filterType].regex) || [];
   }
 
   // Add filter
