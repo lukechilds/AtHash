@@ -65,6 +65,21 @@ export default class Parser {
       this.addFilter(filters);
     }
 
-    return this._text;
+    // Run filters on text
+    return Object.keys(this.filters)
+      .reduce((text, filterType) => {
+
+        // Check we've got valid regex and filter
+        const regex = this.filters[filterType].regex;
+        const filter = this.filters[filterType].filter;
+        if(regex instanceof RegExp && typeof filter === 'function') {
+
+          // Run filter
+          text = text.replace(regex, filter);
+        }
+
+        // Return text for next iteration
+        return text;
+      }, this._text);
   }
 }
