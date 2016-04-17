@@ -29,19 +29,19 @@ describe('AtHash', function() {
 
   describe('.get()', function() {
 
-    it('Run with no text', function () {
+    it('Should run with no text', function () {
       expect(AtHash().get('hashtags')).to.deep.equal([]);
     });
 
-    it('Return empty array on no matches', function () {
+    it('Should return empty array on no matches', function () {
       expect(AtHash('').get('hashtags')).to.deep.equal([]);
     });
 
-    it('Get hashtag array from text', function () {
+    it('Should get hashtag array from text', function () {
       expect(AtHash(text).get('hashtags')).to.deep.equal(['#test', '#text', '#hashtags']);
     });
 
-    it('Throw error if trying to use nonexistent filter', function () {
+    it('Should throw error if trying to use nonexistent filter', function () {
       expect(function() { AtHash().get('nonexistentfilter') }).to.throw(Error);
     });
 
@@ -49,14 +49,14 @@ describe('AtHash', function() {
 
   describe('.addFilter()', function() {
 
-    it('Add default filters', function () {
+    it('Should add default filters', function () {
       var atHash = AtHash();
       expect(atHash.filters.hashtags.filter).to.be.undefined;
       atHash.addFilter('twitter');
       expect(atHash.filters.hashtags.filter).to.equal(twitterFilter.hashtags.filter);
     });
 
-    it('Add custom filters', function () {
+    it('Should add custom filters', function () {
       var atHash = AtHash();
       var customFilter = { hashtags: { filter: tag => tag } };
       expect(atHash.filters.hashtags.filter).to.be.undefined;
@@ -64,7 +64,7 @@ describe('AtHash', function() {
       expect(atHash.filters.hashtags.filter).to.equal(customFilter.hashtags.filter);
     });
 
-    it('Throw error if filter is invalid', function () {
+    it('Should throw error if filter is invalid', function () {
       expect(function() { AtHash().addFilter('nonexistentfilter') }).to.throw(Error);
     });
 
@@ -76,11 +76,11 @@ describe('AtHash', function() {
 
   describe('.parse()', function() {
 
-    it('Empty instance should return null', function () {
+    it('Should return null on instance with no text', function () {
       expect(AtHash().parse()).to.equal(null);
     });
 
-    it('Instance with text should return text', function () {
+    it('Should return text on instance with text', function () {
       expect(AtHash('foo').parse()).to.equal('foo');
     });
 
