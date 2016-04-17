@@ -80,7 +80,7 @@ describe('AtHash', function() {
       expect(AtHash().parse()).to.equal(null);
     });
 
-    it('Instance wirh text should return text', function () {
+    it('Instance with text should return text', function () {
       expect(AtHash('foo').parse()).to.equal('foo');
     });
 
