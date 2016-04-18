@@ -6,7 +6,7 @@ var twitterFilter = require('../dist/filters/twitter');
 
 var text = "#test #text with #hashtags, @multiple @mentions and a http://url.com";
 
-describe('AtHash', function() {
+describe('AtHash()', function() {
 
   it('Should return instance of parser', function () {
     expect(AtHash()).to.be.an.instanceof(Parser);
