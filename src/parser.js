@@ -12,7 +12,8 @@ export default class Parser {
         regex: /\B@\w*[a-zA-Z]+\w*/g
       },
       urls: {
-        regex: /https?:\/\/[^\s,]+/g
+        regex: /https?:\/\/[^\s,]+/g,
+        filter: url => `<a target="_blank" href="${url}">${url}</a>`
       }
     };
   }
