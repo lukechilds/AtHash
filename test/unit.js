@@ -82,8 +82,8 @@ describe('AtHash()', function() {
 
   describe('.parse()', function() {
 
-    it('Should return null on instance with no text', function () {
-      expect(AtHash().parse()).to.equal(null);
+    it('Should return empty string on instance with no text', function () {
+      expect(AtHash().parse()).to.equal('');
     });
 
     it('Should return text on instance with text', function () {
