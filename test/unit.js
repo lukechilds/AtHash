@@ -37,7 +37,7 @@ describe('AtHash()', function() {
       expect(AtHash('').get('hashtags')).to.deep.equal([]);
     });
 
-    it('Should get hashtag array from text', function () {
+    it('Should get array from matches', function () {
       expect(AtHash(text).get('hashtags')).to.deep.equal(['#test', '#text', '#hashtags']);
     });
 
