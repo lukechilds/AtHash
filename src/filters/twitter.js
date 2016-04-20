@@ -1,5 +1,5 @@
 export default {
   hashtags: {
-    filter: tag => `<hash>${tag}</hash>`
+    filter: tag => `<a target="_blank" href="https://twitter.com/hashtag/${tag.replace('#', '')}">${tag}</a>`
   }
 };
