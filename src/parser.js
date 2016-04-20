@@ -10,6 +10,9 @@ export default class Parser {
       },
       mentions: {
         regex: /\B@\w*[a-zA-Z]+\w*/g
+      },
+      urls: {
+        regex: /https?:\/\/[^\s,]+/g
       }
     };
   }
