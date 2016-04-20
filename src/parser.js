@@ -66,6 +66,11 @@ export default class Parser {
   // Parse text
   parse(filters = null) {
 
+    // Check we've got something we can parse
+    if(typeof this._text !== 'string') {
+      return '';
+    }
+
     // If filter is passed add it
     if(filters) {
       this.addFilter(filters);
