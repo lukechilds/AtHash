@@ -7,6 +7,9 @@ export default class Parser {
     this.filters = {
       hashtags: {
         regex: /\B#\w*[a-zA-Z]+\w*/g
+      },
+      mentions: {
+        regex: /\B@\w*[a-zA-Z]+\w*/g
       }
     };
   }
