@@ -32,16 +32,19 @@ describe('AtHash()', function() {
     it('Should run with no text', function () {
       expect(AtHash().get('hashtags')).to.deep.equal([]);
       expect(AtHash().get('mentions')).to.deep.equal([]);
+      expect(AtHash().get('urls')).to.deep.equal([]);
     });
 
     it('Should return empty array on no matches', function () {
       expect(AtHash('').get('hashtags')).to.deep.equal([]);
       expect(AtHash('').get('mentions')).to.deep.equal([]);
+      expect(AtHash('').get('urls')).to.deep.equal([]);
     });
 
     it('Should get array from matches', function () {
       expect(AtHash(text).get('hashtags')).to.deep.equal(['#test', '#text', '#hashtags']);
       expect(AtHash(text).get('mentions')).to.deep.equal(['@multiple', '@mentions']);
+      expect(AtHash(text).get('urls')).to.deep.equal(['http://url.com']);
     });
 
     it('Should throw error if trying to use nonexistent filter', function () {
