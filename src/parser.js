@@ -1,4 +1,5 @@
 import defaultFilters from './filters';
+import { regex as urlRegex } from 'my-name-is-url';
 
 export default class Parser {
 
@@ -12,7 +13,7 @@ export default class Parser {
         regex: /\B@\w*[a-zA-Z]+\w*/g
       },
       urls: {
-        regex: /https?:\/\/[^\s,]*[^\s,.]/g,
+        regex: urlRegex,
         filter: url => `<a target="_blank" href="${url}">${url}</a>`
       }
     };

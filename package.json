@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "description": "Social text parser",
   "main": "dist/athash.js",
-  "dependencies": {},
+  "dependencies": {
+    "my-name-is-url": "^1.3.1"
+  },
   "devDependencies": {
     "babel-cli": "^6.7.5",
     "babel-plugin-add-module-exports": "^0.1.2",
