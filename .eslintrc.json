@@ -153,7 +153,7 @@
         "no-warning-comments": "error",
         "no-whitespace-before-property": "error",
         "no-with": "error",
-        "object-curly-spacing": "error",
+        "object-curly-spacing": "off",
         "object-shorthand": "error",
         "one-var": [
           "error",
@@ -175,7 +175,7 @@
         "require-yield": "error",
         "semi": "error",
         "semi-spacing": "error",
-        "sort-imports": "error",
+        "sort-imports": "off",
         "sort-vars": "error",
         "space-before-blocks": "error",
         "space-before-function-paren": "off",
