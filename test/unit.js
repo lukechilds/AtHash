@@ -90,6 +90,10 @@ describe('AtHash()', function() {
       expect(AtHash('foo').parse()).to.equal('foo');
     });
 
+    it('Should run url filter on url', function () {
+      expect(AtHash('http://url.com').parse()).to.equal('<a target="_blank" href="http://url.com">http://url.com</a>');
+    });
+
   });
 
 });
