@@ -1,99 +1,79 @@
-var expect = require('chai').expect;
+import test from 'ava';
 
-var AtHash = require('../dist/athash');
-var Parser = require('../dist/parser');
-var twitterFilter = require('../dist/filters/twitter');
+import AtHash from '../dist/athash';
+import Parser from '../dist/parser';
+import twitterFilter from '../dist/filters/twitter';
 
-var text = "#test #text with #hashtags, @multiple @mentions and a http://url.com";
+const text = "#test #text with #hashtags, @multiple @mentions and a http://url.com";
 
-describe('AtHash()', function() {
+test('AtHash() should return instance of parser', t => {
+  t.true(AtHash() instanceof Parser);
+});
 
-  it('Should return instance of parser', function () {
-    expect(AtHash()).to.be.an.instanceof(Parser);
-  });
+test('AtHash() can be instantiated by new or factory function', t => {
+  t.true(AtHash() instanceof Parser);
+  t.true(new AtHash instanceof Parser);
+});
 
-  describe('.text()', function() {
+test('.text() should set text property', t => {
+  const atHash = AtHash();
+  t.is(atHash._text, null);
+  atHash.text('foo');
+  t.is(atHash._text, 'foo');
+});
 
-    it('Should set text property', function () {
-      var atHash = AtHash();
-      expect(atHash._text).to.equal(null);
-      atHash.text('foo');
-      expect(atHash._text).to.equal('foo');
-    });
+test('.text() should be chainable', t => {
+  t.true(AtHash().text() instanceof Parser);
+});
 
-    it('Should be chainable', function () {
-      expect(AtHash().text()).to.be.an.instanceof(Parser);
-    });
+test('.get() should return empty array on no matches', t => {
+  t.deepEqual(AtHash().get('hashtags'), []);
+  t.deepEqual(AtHash().get('mentions'), []);
+  t.deepEqual(AtHash().get('urls'), []);
+});
 
-  });
+test('.get() should get array from matches', t => {
+  t.deepEqual(AtHash(text).get('hashtags'), ['#test', '#text', '#hashtags']);
+  t.deepEqual(AtHash(text).get('mentions'), ['@multiple', '@mentions']);
+  t.deepEqual(AtHash(text).get('urls'), ['http://url.com']);
+});
 
-  describe('.get()', function() {
+test('.get() should throw error if trying to use nonexistent filter', t => {
+  t.throws(() => AtHash().get('nonexistentfilter'));
+});
 
-    it('Should run with no text', function () {
-      expect(AtHash().get('hashtags')).to.deep.equal([]);
-      expect(AtHash().get('mentions')).to.deep.equal([]);
-      expect(AtHash().get('urls')).to.deep.equal([]);
-    });
+test('.addFilter() should add default filters', t => {
+  t.throws(() => AtHash().get('nonexistentfilter'));
+  const atHash = AtHash();
+  t.is(atHash.filters.hashtags.filter, undefined);
+  atHash.addFilter('twitter');
+  t.is(atHash.filters.hashtags.filter, twitterFilter.hashtags.filter);
+});
 
-    it('Should return empty array on no matches', function () {
-      expect(AtHash('').get('hashtags')).to.deep.equal([]);
-      expect(AtHash('').get('mentions')).to.deep.equal([]);
-      expect(AtHash('').get('urls')).to.deep.equal([]);
-    });
+test('.addFilter() should add custom filters', t => {
+  const atHash = AtHash();
+  const customFilter = { hashtags: { filter: tag => tag } };
+  t.is(atHash.filters.hashtags.filter, undefined);
+  atHash.addFilter(customFilter);
+  t.is(atHash.filters.hashtags.filter, customFilter.hashtags.filter);
+});
 
-    it('Should get array from matches', function () {
-      expect(AtHash(text).get('hashtags')).to.deep.equal(['#test', '#text', '#hashtags']);
-      expect(AtHash(text).get('mentions')).to.deep.equal(['@multiple', '@mentions']);
-      expect(AtHash(text).get('urls')).to.deep.equal(['http://url.com']);
-    });
+test('.addFilter() throw error if filter is invalid', t => {
+  t.throws(() => AtHash().addFilter('nonexistentfilter'));
+});
 
-    it('Should throw error if trying to use nonexistent filter', function () {
-      expect(function() { AtHash().get('nonexistentfilter') }).to.throw(Error);
-    });
+test('.addFilter() should be chainable', t => {
+  t.true(AtHash().addFilter({}) instanceof Parser);
+});
 
-  });
+test('.parse() should return empty string on instance with no text', t => {
+  t.is(AtHash().parse(), '');
+});
 
-  describe('.addFilter()', function() {
+test('.parse() should return text on instance with text', t => {
+  t.is(AtHash('foo').parse(), 'foo');
+});
 
-    it('Should add default filters', function () {
-      var atHash = AtHash();
-      expect(atHash.filters.hashtags.filter).to.be.undefined;
-      atHash.addFilter('twitter');
-      expect(atHash.filters.hashtags.filter).to.equal(twitterFilter.hashtags.filter);
-    });
-
-    it('Should add custom filters', function () {
-      var atHash = AtHash();
-      var customFilter = { hashtags: { filter: tag => tag } };
-      expect(atHash.filters.hashtags.filter).to.be.undefined;
-      atHash.addFilter(customFilter);
-      expect(atHash.filters.hashtags.filter).to.equal(customFilter.hashtags.filter);
-    });
-
-    it('Should throw error if filter is invalid', function () {
-      expect(function() { AtHash().addFilter('nonexistentfilter') }).to.throw(Error);
-    });
-
-    it('Should be chainable', function () {
-      expect(AtHash().addFilter({})).to.be.an.instanceof(Parser);
-    });
-
-  });
-
-  describe('.parse()', function() {
-
-    it('Should return empty string on instance with no text', function () {
-      expect(AtHash().parse()).to.equal('');
-    });
-
-    it('Should return text on instance with text', function () {
-      expect(AtHash('foo').parse()).to.equal('foo');
-    });
-
-    it('Should run url filter on url', function () {
-      expect(AtHash('http://url.com').parse()).to.equal('<a target="_blank" href="http://url.com">http://url.com</a>');
-    });
-
-  });
-
+test('.parse() should run url filter on url', t => {
+  t.is(AtHash('http://url.com').parse(), '<a target="_blank" href="http://url.com">http://url.com</a>');
 });
