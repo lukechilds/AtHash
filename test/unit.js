@@ -73,6 +73,14 @@ test('.parse() should return text on instance with text', t => {
   t.is(AtHash('foo').parse(), 'foo');
 });
 
+test('.parse() should pass args to .addFilter()', t => {
+  const atHash = AtHash(text);
+  const customFilter = { hashtags: { filter: tag => tag } };
+  t.is(atHash.filters.hashtags.filter, undefined);
+  atHash.parse(customFilter);
+  t.is(atHash.filters.hashtags.filter, customFilter.hashtags.filter);
+});
+
 test('.parse() should run url filter on url', t => {
   t.is(AtHash('http://url.com').parse(), '<a target="_blank" href="http://url.com">http://url.com</a>');
 });
