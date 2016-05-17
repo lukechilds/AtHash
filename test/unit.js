@@ -43,7 +43,6 @@ test('.get() should throw error if trying to use nonexistent filter', t => {
 });
 
 test('.addFilter() should add default filters', t => {
-  t.throws(() => AtHash().get('nonexistentfilter'));
   const atHash = AtHash();
   t.is(atHash.filters.hashtags.filter, undefined);
   atHash.addFilter('twitter');
