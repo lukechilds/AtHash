@@ -84,3 +84,8 @@ test('.parse() should pass args to .addFilter()', t => {
 test('.parse() should run url filter on url', t => {
   t.is(AtHash('http://url.com').parse(), '<a target="_blank" href="http://url.com">http://url.com</a>');
 });
+
+test('.parse(\'twitter\') should run twitter filters on url', t => {
+  t.is(AtHash('#hashtag').parse('twitter'), '<a target="_blank" href="https://twitter.com/hashtag/hashtag">#hashtag</a>');
+  t.is(AtHash('@mention').parse('twitter'), '<a target="_blank" href="https://twitter.com/mention">@mention</a>');
+});
