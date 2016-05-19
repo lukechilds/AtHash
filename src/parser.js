@@ -6,15 +6,15 @@ export default class Parser {
   constructor(text = null) {
     this.text(text);
     this.filters = {
+      urls: {
+        regex: urlRegex,
+        filter: url => `<a target="_blank" href="${url}">${url}</a>`
+      },
       hashtags: {
         regex: /\B#\w*[a-zA-Z]+\w*/g
       },
       mentions: {
         regex: /\B@\w*[a-zA-Z]+\w*/g
-      },
-      urls: {
-        regex: urlRegex,
-        filter: url => `<a target="_blank" href="${url}">${url}</a>`
       }
     };
   }
