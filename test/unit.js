@@ -89,3 +89,8 @@ test('.parse(\'twitter\') should run twitter filters on url', t => {
   t.is(AtHash('#hashtag').parse('twitter'), '<a target="_blank" href="https://twitter.com/hashtag/hashtag">#hashtag</a>');
   t.is(AtHash('@mention').parse('twitter'), '<a target="_blank" href="https://twitter.com/mention">@mention</a>');
 });
+
+test('.parse(\'instagram\') should run instagram filters on url', t => {
+  t.is(AtHash('#hashtag').parse('instagram'), '<a target="_blank" href="https://www.instagram.com/explore/tags/hashtag/">#hashtag</a>');
+  t.is(AtHash('@mention').parse('instagram'), '<a target="_blank" href="https://www.instagram.com/mention/">@mention</a>');
+});
